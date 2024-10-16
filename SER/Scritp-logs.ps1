@@ -1,16 +1,13 @@
-<#Esto me imagino que lo que hace es decir quien lo envia#>
-$from = "uncorreo@correo.com"
-$smtpServer = "smtp.outlook.com"
+# Quien envia el correo
+$from = "uncorreo@ejemplo.com"
+$smtpServer = "smtp.tuproovedordecorreo.com"
 
-<#Esto me imagino que lo que hace es decir a quien se lo envia#>
+# A quien envia el correo
 $to = "uncorreo@loqusea.es"
 $subject = "Notificacion de $($env:computername)"
-<#Esto no se lo que hace#>
+# Recoge la información del ultimo log que se ha echo
 $evento = Get-Eventing -LogName "Security" -Newest 1
-<#
-Esto tampoco se lo que hace 
-Ademas no se ve bien lo que hay despues del igual de body
-#>
+# Esto es lo que aparece en el correo que se envia recogiendo datos con las variables del sistema windows
 $body = @"
 Evento a revisar en $($evento.MachineName)
 Identificador: $($evento.EventId)
@@ -19,8 +16,10 @@ Tipo: $($evento.EntryType)
 Fecha / Hora: $($evento.TimeGenerated)
 Texto: $($evento.Message)
 "@
-<#Esto tampoco se muy bien lo que hace#>
+
+# Va a ir al smtp Server para autentificarse y enviar el correo
 $smtpClient = New-Object System.Net.Mail.SmtpClient($smtpServer, 587)
 $smtpClient.EnableSs1 = $true
-$smtpClient.Credentials = New-Object System.Net.NetworkCredential("Usuario", "Contraseña")
+$smtpClient.Credentials = New-Object System.Net.NetworkCredential("Usuario(tuCorreo)", "Contraseña(La que generes para permitir que este script entre en el correo para enviarlo por ti)")
 $smtpClient.Send($from, $to, $subject, $body)
+# Esta ultima seccion tienes que poner tu correo y una contraseña que hayas generado para la aplicación en especifico

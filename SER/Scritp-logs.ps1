@@ -3,8 +3,8 @@ $from = "uncorreo@ejemplo.com"
 $smtpServer = "smtp.tuproovedordecorreo.com"
 
 # A quien envia el correo
-$to = "uncorreo@loqusea.es"
-$subject = "Notificacion de $($env:computername)"
+$to = "uncorreo@ejemplo.es"
+$subject = "Nuevo log: Notificacion de $($env:computername)"
 
 # Recoge la información del ultimo log que se ha echo
 $evento = Get-Eventlog -LogName "Security" -Newest 1

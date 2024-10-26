@@ -10,7 +10,7 @@ $disk = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"
 # Crear contenido para el archivo
 $content = @"
 Información del Sistema
-======================
+-------------------
 Nombre del equipo: $computerName
 Versión del sistema operativo: $($os.Caption) $($os.Version)
 Memoria total (GB): [math]::round($memory.Sum / 1GB, 2)
